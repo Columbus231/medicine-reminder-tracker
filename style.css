@@ -102,3 +102,19 @@ button.secondary {
   flex: 1;
   cursor: pointer;
 }
+.badge {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  border: 2px solid;
+  white-space: nowrap;
+}
+
+.status-upcoming .badge { color: #3b4a61; background: #eef1f6; border-color: #b8c2d1; }
+.status-due .badge      { color: #7a4b00; background: #fff3d6; border-color: #e0a526; }
+.status-overdue .badge  { color: #9b1c1c; background: #fde8e8; border-color: #e05252; }
+.status-taken .badge    { color: #14633a; background: #e3f6ec; border-color: #3fae75; }
+
+.status-taken label { text-decoration: line-through; color: var(--muted); }
+.status-overdue { background: #fff8f8; }

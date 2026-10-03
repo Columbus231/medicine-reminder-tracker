@@ -47,10 +47,10 @@ Context: The skeleton from PLAN.md is running with loadData() and an empty-state
 
 ### Feature 2: Today's checklist
 **Prompt:**
-[paste]
+Context: add-medicine form works and saves to localStorage. Task: show today's checklist, one row per medicine per time, sorted by time, with checkboxes. Ticking saves the dose as medicineId@HH:MM under today's date. Constraints: plain JS, keep existing functions, no status colours yet, re-render every minute so the date updates after midnight.
 
 **Result:**
-**Follow-up prompt (if any):**
+The checklist shows one row per medicine per time, sorted by time. Ticking a dose saves it under today's date and it stays ticked after a page refresh. Because taken doses are keyed by date, the next day starts with all boxes empty while the medicine list stays saved. Committed as "Add today's checklist with tickable doses" and pushed to GitHub.
 
 ---
 

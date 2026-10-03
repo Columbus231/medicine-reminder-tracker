@@ -1,8 +1,15 @@
 // Medicine Reminder Tracker
-// Step 2: add-medicine form with validation, saved to localStorage.
+// Features: add-medicine form, today's checklist, status indicators.
 
 const STORAGE_KEY = "medicineTracker";
 const TIME_PATTERN = /^([01]\d|2[0-3]):[0-5]\d$/; // HH:MM, 24-hour
+
+const STATUS_LABELS = {
+  taken: "✓ Taken",
+  upcoming: "Upcoming",
+  due: "Due now",
+  overdue: "Overdue",
+};
 
 // Times the user has added to the form but not yet saved.
 let pendingTimes = [];
@@ -130,8 +137,6 @@ function handleSubmit(event) {
   render();
 }
 
-// ----- Display -----
-
 // ----- Today's checklist -----
 
 // Builds one entry per medicine per time, sorted by time.
@@ -166,21 +171,41 @@ function toggleDose(doseKey) {
   render();
 }
 
+// Decides a dose's status. Kept separate (and takes `now` as an argument)
+// so it is easy to test with fake times.
+// Returns: "taken", "upcoming", "due", or "overdue".
+function getDoseStatus(time, isTaken, now = new Date()) {
+  if (isTaken) return "taken";
+
+  const [hours, minutes] = time.split(":").map(Number);
+  const scheduledMinutes = hours * 60 + minutes;
+  const nowMinutes = now.getHours() * 60 + now.getMinutes();
+  const minutesPast = nowMinutes - scheduledMinutes;
+
+  if (minutesPast < 0) return "upcoming";
+  if (minutesPast <= 60) return "due";
+  return "overdue";
+}
+
 function renderChecklist(data) {
   const list = document.getElementById("checklist");
   list.textContent = "";
 
   const takenToday = data.taken[getTodayKey()] || [];
   const doses = buildTodaysDoses(data.medicines);
+  const now = new Date();
 
   doses.forEach((dose) => {
+    const isTaken = takenToday.includes(dose.key);
+    const status = getDoseStatus(dose.time, isTaken, now);
+
     const item = document.createElement("li");
-    item.className = "dose";
+    item.className = `dose status-${status}`;
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.id = "dose-" + dose.key;
-    checkbox.checked = takenToday.includes(dose.key);
+    checkbox.checked = isTaken;
     checkbox.addEventListener("change", () => toggleDose(dose.key));
 
     const label = document.createElement("label");
@@ -188,8 +213,13 @@ function renderChecklist(data) {
     const doseText = dose.dose ? ` (${dose.dose})` : "";
     label.textContent = `${dose.time}  ${dose.name}${doseText}`;
 
+    const badge = document.createElement("span");
+    badge.className = "badge";
+    badge.textContent = STATUS_LABELS[status];
+
     item.appendChild(checkbox);
     item.appendChild(label);
+    item.appendChild(badge);
     list.appendChild(item);
   });
 
@@ -231,5 +261,5 @@ document.getElementById("add-time-btn").addEventListener("click", handleAddTime)
 document.getElementById("medicine-form").addEventListener("submit", handleSubmit);
 render();
 
-// Refresh every minute so the date rolls over at midnight.
+// Refresh every minute so statuses update and the date rolls over at midnight.
 setInterval(render, 60 * 1000);
