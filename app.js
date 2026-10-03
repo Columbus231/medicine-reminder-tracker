@@ -1,5 +1,5 @@
 // Medicine Reminder Tracker
-// Features: add-medicine form, today's checklist, status indicators.
+// Features: add-medicine form, today's checklist, status indicators, delete.
 
 const STORAGE_KEY = "medicineTracker";
 const TIME_PATTERN = /^([01]\d|2[0-3]):[0-5]\d$/; // HH:MM, 24-hour
@@ -137,6 +137,17 @@ function handleSubmit(event) {
   render();
 }
 
+// ----- Deleting a medicine -----
+
+function deleteMedicine(id, name) {
+  if (!confirm(`Delete ${name}? This removes it from your checklist.`)) return;
+
+  const data = loadData();
+  data.medicines = data.medicines.filter((med) => med.id !== id);
+  saveData(data);
+  render();
+}
+
 // ----- Today's checklist -----
 
 // Builds one entry per medicine per time, sorted by time.
@@ -228,7 +239,7 @@ function renderChecklist(data) {
     .classList.toggle("hidden", doses.length > 0);
 }
 
-// ----- Display -----
+// ----- Saved medicines list -----
 
 function renderSavedList(medicines) {
   const list = document.getElementById("saved-list");
@@ -236,11 +247,26 @@ function renderSavedList(medicines) {
 
   medicines.forEach((med) => {
     const item = document.createElement("li");
+    item.className = "saved-item";
+
+    const text = document.createElement("span");
     const doseText = med.dose ? ` (${med.dose})` : "";
-    item.textContent = `${med.name}${doseText} at ${med.times.join(", ")}`;
+    text.textContent = `${med.name}${doseText} at ${med.times.join(", ")}`;
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.type = "button";
+    deleteBtn.className = "delete-btn";
+    deleteBtn.textContent = "Delete";
+    deleteBtn.setAttribute("aria-label", `Delete ${med.name}`);
+    deleteBtn.addEventListener("click", () => deleteMedicine(med.id, med.name));
+
+    item.appendChild(text);
+    item.appendChild(deleteBtn);
     list.appendChild(item);
   });
 }
+
+// ----- Main render -----
 
 function render() {
   const data = loadData();

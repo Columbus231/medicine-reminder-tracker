@@ -52,6 +52,14 @@ Context: add-medicine form works and saves to localStorage. Task: show today's c
 **Result:**
 The checklist shows one row per medicine per time, sorted by time. Ticking a dose saves it under today's date and it stays ticked after a page refresh. Because taken doses are keyed by date, the next day starts with all boxes empty while the medicine list stays saved. Committed as "Add today's checklist with tickable doses" and pushed to GitHub.
 
+
+### Feature 3: Status indicators
+
+**Prompt:**
+Context: The checklist works, with doses sorted by time and tick boxes saved by date. Task: Add a status to each dose: taken, upcoming, due (0 to 60 minutes past, not ticked), overdue (more than 60 minutes past, not ticked). Show the status as a text label plus a colour, not colour alone. Constraints: Plain JS, keep existing functions, put the status logic in one separate function so it's easy to test. The existing minute refresh should update statuses automatically.
+
+**Result:** Needed a fix
+The status logic and badges worked, but my paste left a duplicate function line that broke form saving. Fixed it (see Phase 4). After the fix, [say what you saw: badges show the right status, ticking turns a dose green, and so on].
 ---
 
 ## Phase 4: Debugging
