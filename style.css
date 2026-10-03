@@ -1,69 +1,104 @@
-:root {
-  --bg: #f5f7fa;
-  --card: #ffffff;
-  --text: #1c2430;
-  --muted: #5b6676;
-  --primary: #2563eb;
-  --border: #d9dee6;
-  --warn-bg: #fff7e0;
-  --warn-border: #f0c14b;
+label {
+  display: block;
+  font-weight: 600;
+  margin-top: 0.75rem;
 }
 
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  padding: 1rem;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-size: 1.125rem; /* large, readable text */
-  line-height: 1.5;
-  color: var(--text);
-  background: var(--bg);
-  max-width: 640px;
-  margin-inline: auto;
-}
-
-.app-header h1 {
-  margin: 0;
-  font-size: 1.75rem;
-}
-
-.today-date {
-  margin: 0.25rem 0 1rem;
-  color: var(--muted);
-}
-
-.disclaimer {
-  background: var(--warn-bg);
-  border: 1px solid var(--warn-border);
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-}
-
-section {
-  background: var(--card);
+input[type="text"],
+input[type="time"] {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  font-size: 1.1rem;
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  margin-top: 0.25rem;
+}
+
+.time-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.time-row input[type="time"] {
+  flex: 1;
+}
+
+button {
+  font-size: 1.05rem;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+button.primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
   margin-top: 1rem;
+  width: 100%;
 }
 
-section h2 {
-  margin-top: 0;
-  font-size: 1.35rem;
+button.secondary {
+  background: #fff;
+  color: var(--primary);
+  border-color: var(--primary);
+  margin-top: 0.25rem;
 }
 
-.checklist {
+.chips {
   list-style: none;
-  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   padding: 0;
+  margin: 0.5rem 0 0;
 }
 
-.empty-state {
+.chips li {
+  background: #e8f0fe;
+  border-radius: 999px;
+  padding: 0.25rem 0.5rem 0.25rem 0.9rem;
+}
+
+.chip-remove {
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  padding: 0 0.4rem;
   color: var(--muted);
-  text-align: center;
-  padding: 1.5rem 0;
 }
 
-.hidden { display: none; }
+.error {
+  color: #b42318;
+  min-height: 1.5rem;
+  margin: 0.75rem 0 0;
+}
+
+.saved-list {
+  padding-left: 1.25rem;
+  margin: 0;
+}
+.dose {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.dose:last-child { border-bottom: none; }
+
+.dose input[type="checkbox"] {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.dose label {
+  margin: 0;
+  font-weight: 500;
+  flex: 1;
+  cursor: pointer;
+}

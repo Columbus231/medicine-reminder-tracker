@@ -18,11 +18,39 @@
   </p>
 
   <main>
-    <section aria-labelledby="checklist-heading">
+    <section aria-labelledby="add-heading">
+     <section aria-labelledby="checklist-heading">
       <h2 id="checklist-heading">Today's checklist</h2>
       <ul id="checklist" class="checklist"></ul>
+      <p id="checklist-empty" class="empty-state">
+        Nothing scheduled yet. Add a medicine below to get started.
+      </p>
+    </section>
+      <h2 id="add-heading">Add a medicine</h2>
+      <form id="medicine-form" novalidate>
+        <label for="name">Medicine name</label>
+        <input type="text" id="name" placeholder="e.g. Metformin" autocomplete="off">
+
+        <label for="dose">Dose</label>
+        <input type="text" id="dose" placeholder="e.g. 1 tablet" autocomplete="off">
+
+        <label for="time">Time of day</label>
+        <div class="time-row">
+          <input type="time" id="time">
+          <button type="button" id="add-time-btn" class="secondary">Add time</button>
+        </div>
+        <ul id="pending-times" class="chips"></ul>
+
+        <p id="form-error" class="error" role="alert"></p>
+        <button type="submit" class="primary">Save medicine</button>
+      </form>
+    </section>
+
+    <section aria-labelledby="saved-heading">
+      <h2 id="saved-heading">Saved medicines</h2>
+      <ul id="saved-list" class="saved-list"></ul>
       <p id="empty-state" class="empty-state">
-        No medicines yet. Add your first medicine to see today's checklist here.
+        No medicines yet. Add your first medicine above.
       </p>
     </section>
   </main>
