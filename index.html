@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medicine Reminder Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Medicine Reminder Tracker</h1>
+    <p id="today-date" class="today-date"></p>
+  </header>
+
+  <p class="disclaimer" role="note">
+    This app is a personal reminder tool, <strong>not medical advice</strong>.
+    Always follow your doctor's or pharmacist's instructions.
+  </p>
+
+  <main>
+    <section aria-labelledby="checklist-heading">
+      <h2 id="checklist-heading">Today's checklist</h2>
+      <ul id="checklist" class="checklist"></ul>
+      <p id="empty-state" class="empty-state">
+        No medicines yet. Add your first medicine to see today's checklist here.
+      </p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
