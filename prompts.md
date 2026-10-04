@@ -61,7 +61,12 @@ Context: The checklist works, with doses sorted by time and tick boxes saved by 
 **Result:** Needed a fix
 The status logic and badges worked, but my paste left a duplicate function line that broke form saving. Fixed it (see Phase 4). After the fix, [say what you saw: badges show the right status, ticking turns a dose green, and so on].
 ---
+### Feature 4: Progress summary (nice-to-have)
 
+**Prompt:**
+Context: All 4 must-haves plus delete work. Task: Show a progress line above the checklist, such as "3 of 5 doses taken today", with a progress bar. Constraints: plain JS, keep existing functions, only count doses that exist today so deleted medicines don't affect the total.
+
+**Result:** all the test passed.
 ## Phase 4: Debugging
 
 ## Phase 4: Debugging
@@ -78,9 +83,24 @@ When replacing a function, I left the old first line behind, so the rest of the 
 **Second occurrence:**
 The same symptom came back after adding the delete feature (Save did nothing, no console error). Cause: again a partial paste when replacing a function. Fix: replaced the entire app.js file instead of patching pieces. Lesson: for multi-part changes, replace whole files, and commit a working state before each new feature so `git checkout` can restore it.
 
-## Phase 5: Polish
+## Phase 4: Debugging (usability issue)
+
+**Problem:**
+I selected a valid time (03:24) in the time field and clicked Save, but got "Please add at least one time." Expected: the medicine saves. Actual: the time was never added to the list because I hadn't clicked "Add time".
 
 **Prompt:**
-[README, UI cleanup, etc.]
+[paste what you asked me, e.g. "I entered a correct time but it still says please add at least one time" plus the screenshot]
+
+**Lesson learned:**
+The app was working as designed, but the two-step flow is confusing for the target users. Fix: Save now also accepts a valid time typed in the box. Testing my own app as a first-time user exposed a usability gap that the code tests missed.
+
+### Phase 5: Polish
+
+### README
+
+**Prompt:**
+Context: All features work (add medicine, today's checklist, status indicators, delete, progress summary) and are committed to GitHub. Task: Write a README.md with: a one-line pitch, problem, solution, features, how to run, tech stack, a "How I used AI" section, and limitations/future improvements. Include a "not medical advice" note and a screenshot placeholder. Constraints: only list features that actually exist in the app. Keep the language simple and honest.
 
 **Result:**
+Got a complete README. I replaced GitHub's placeholder README with it and edited the "How I used AI" section to describe my real bugs (a paste error that broke saving, and a confusing two-step time input). I left 7-day history under "Future improvements" because I decided not to build it, to keep the scope small.
+

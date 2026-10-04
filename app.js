@@ -5,10 +5,10 @@ const STORAGE_KEY = "medicineTracker";
 const TIME_PATTERN = /^([01]\d|2[0-3]):[0-5]\d$/; // HH:MM, 24-hour
 
 const STATUS_LABELS = {
-  taken: "✓ Taken",
-  upcoming: "Upcoming",
-  due: "Due now",
-  overdue: "Overdue",
+  taken: "✅ Taken",
+  upcoming: "⏰ Upcoming",
+  due: "🔔 Due now",
+  overdue: "⚠️ Overdue",
 };
 
 // Times the user has added to the form but not yet saved.

@@ -8,29 +8,47 @@
 </head>
 <body>
   <header class="app-header">
-    <h1>Medicine Reminder Tracker</h1>
-    <p id="today-date" class="today-date"></p>
+    <div class="header-text">
+      <h1>Medicine Reminder</h1>
+      <p id="today-date" class="today-date"></p>
+    </div>
+    <!-- Inline SVG illustration: a pill and a clock -->
+    <svg class="hero-art" viewBox="0 0 120 90" aria-hidden="true">
+      <circle cx="80" cy="45" r="30" fill="#ffffff" fill-opacity="0.25"/>
+      <circle cx="80" cy="45" r="24" fill="#ffffff"/>
+      <circle cx="80" cy="45" r="2.5" fill="#0f766e"/>
+      <line x1="80" y1="45" x2="80" y2="28" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/>
+      <line x1="80" y1="45" x2="92" y2="50" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/>
+      <g transform="rotate(-35 32 58)">
+        <rect x="8" y="46" width="48" height="24" rx="12" fill="#ffffff"/>
+        <path d="M32 46 h12 a12 12 0 0 1 0 24 h-12 z" fill="#fbbf24"/>
+        <rect x="8" y="46" width="48" height="24" rx="12" fill="none" stroke="#0f766e" stroke-width="2"/>
+        <line x1="32" y1="46" x2="32" y2="70" stroke="#0f766e" stroke-width="2"/>
+      </g>
+    </svg>
   </header>
 
   <p class="disclaimer" role="note">
-    This app is a personal reminder tool, <strong>not medical advice</strong>.
+    ⚕️ This app is a personal reminder tool, <strong>not medical advice</strong>.
     Always follow your doctor's or pharmacist's instructions.
   </p>
 
   <main>
-    <section aria-labelledby="add-heading">
-     <section aria-labelledby="checklist-heading">
-      <h2 id="checklist-heading">Today's checklist</h2>
-            <div id="progress" class="progress hidden">
+    <section aria-labelledby="checklist-heading">
+      <h2 id="checklist-heading">📋 Today's checklist</h2>
+      <div id="progress" class="progress hidden">
         <p id="progress-text"></p>
         <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
       </div>
       <ul id="checklist" class="checklist"></ul>
       <p id="checklist-empty" class="empty-state">
+        <span class="empty-icon">🌿</span>
         Nothing scheduled yet. Add a medicine below to get started.
       </p>
     </section>
-      <h2 id="add-heading">Add a medicine</h2>
+
+    <section aria-labelledby="add-heading">
+      <h2 id="add-heading">➕ Add a medicine</h2>
       <form id="medicine-form" novalidate>
         <label for="name">Medicine name</label>
         <input type="text" id="name" placeholder="e.g. Metformin" autocomplete="off">
@@ -44,20 +62,24 @@
           <button type="button" id="add-time-btn" class="secondary">Add time</button>
         </div>
         <ul id="pending-times" class="chips"></ul>
+        <p class="hint">Need more than one time a day? Click "Add time" for each one.</p>
 
         <p id="form-error" class="error" role="alert"></p>
-        <button type="submit" class="primary">Save medicine</button>
+        <button type="submit" class="primary">💊 Save medicine</button>
       </form>
     </section>
 
     <section aria-labelledby="saved-heading">
-      <h2 id="saved-heading">Saved medicines</h2>
+      <h2 id="saved-heading">🗂️ Saved medicines</h2>
       <ul id="saved-list" class="saved-list"></ul>
       <p id="empty-state" class="empty-state">
+        <span class="empty-icon">💊</span>
         No medicines yet. Add your first medicine above.
       </p>
     </section>
   </main>
+
+  <footer class="app-footer">Made for the ProtocolX Vibe Coding Challenge</footer>
 
   <script src="app.js"></script>
 </body>
