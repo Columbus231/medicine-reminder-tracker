@@ -64,16 +64,19 @@ The status logic and badges worked, but my paste left a duplicate function line 
 
 ## Phase 4: Debugging
 
+## Phase 4: Debugging
+
 **Problem:**
-[what went wrong, expected vs actual]
+After adding status indicators, the Save medicine button stopped working and the page showed no medicines. Expected: medicine saves and appears in the checklist. Actual: nothing happened, and the Console showed no errors (only an unrelated favicon 404).
 
 **Prompt:**
-[paste]
+[paste what you asked me, e.g. "I can't add a medicine, console shows nothing. Here is my full app.js."]
 
 **Lesson learned:**
-[one line]
+When replacing a function, I left the old first line behind, so the rest of the file was nested inside a function that never ran. Missing errors can still mean broken structure. Replace functions completely, and paste changes one at a time, refreshing after each.
 
----
+**Second occurrence:**
+The same symptom came back after adding the delete feature (Save did nothing, no console error). Cause: again a partial paste when replacing a function. Fix: replaced the entire app.js file instead of patching pieces. Lesson: for multi-part changes, replace whole files, and commit a working state before each new feature so `git checkout` can restore it.
 
 ## Phase 5: Polish
 

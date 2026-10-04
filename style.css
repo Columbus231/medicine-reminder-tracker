@@ -142,3 +142,19 @@ button.secondary {
   padding: 0.4rem 0.8rem;
   font-size: 0.95rem;
 }
+.progress { margin-bottom: 0.75rem; }
+.progress p { margin: 0 0 0.4rem; font-weight: 600; }
+
+.progress-track {
+  height: 12px;
+  background: #e5e9f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: #3fae75;
+  transition: width 0.3s ease;
+}

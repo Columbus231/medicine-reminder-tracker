@@ -106,6 +106,11 @@ function handleSubmit(event) {
 
   const name = document.getElementById("name").value.trim();
   const dose = document.getElementById("dose").value.trim();
+   const typedTime = document.getElementById("time").value;
+  if (TIME_PATTERN.test(typedTime) && !pendingTimes.includes(typedTime)) {
+    pendingTimes.push(typedTime);
+    pendingTimes.sort();
+  }
 
   if (!name) {
     showError("Please enter the medicine name.");
@@ -265,6 +270,24 @@ function renderSavedList(medicines) {
     list.appendChild(item);
   });
 }
+// ----- Progress summary -----
+
+function renderProgress(data) {
+  const takenToday = data.taken[getTodayKey()] || [];
+  const doses = buildTodaysDoses(data.medicines);
+  const takenCount = doses.filter((d) => takenToday.includes(d.key)).length;
+
+  const progress = document.getElementById("progress");
+  progress.classList.toggle("hidden", doses.length === 0);
+  if (doses.length === 0) return;
+
+  const percent = Math.round((takenCount / doses.length) * 100);
+  document.getElementById("progress-text").textContent =
+    takenCount === doses.length
+      ? `All ${doses.length} doses taken today. Well done!`
+      : `${takenCount} of ${doses.length} doses taken today`;
+  document.getElementById("progress-bar").style.width = percent + "%";
+}
 
 // ----- Main render -----
 
@@ -277,6 +300,7 @@ function render() {
     });
 
   renderChecklist(data);
+  renderProgress(data);
   renderSavedList(data.medicines);
   document
     .getElementById("empty-state")
